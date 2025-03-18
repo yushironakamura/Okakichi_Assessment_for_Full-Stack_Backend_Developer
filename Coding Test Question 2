@@ -1,41 +1,26 @@
-using System;
-using System.Collections.Generic;
-
-public class Program
-{
-    public static void SelectionSort(List<int> arr)
-    {
-        int n = arr.Count;
-        for (int i = 0; i < n - 1; i++) // loop all the array value
-        {
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++)
-            {
-                if (arr[j] < arr[minIndex])
-                {
-                    minIndex = j; // find the minimum integers
-                }
-            }
-            int temp = arr[minIndex]; // swap the min integer with the 1st integer
-            arr[minIndex] = arr[i];
-            arr[i] = temp;
-        }
+function insertionSort(arr) {
+  for (let aa = 1; aa < arr.length; aa++) { // Loop from the second element to the end of the array
+    let current = arr[aa]; // Store the current element
+    let prev = aa - 1; // Initialize the previous element index
+    while (prev >= 0 && arr[prev] > current) { // Shift elements of the sorted segment forward if they are larger than the current element
+      arr[prev + 1] = arr[prev];
+      prev--;
     }
-
-    public static void Main()
-    {
-        List<int> numbers = new List<int> { 45, 22, 67, 34, 100, 49, 119, 98, 37, 11 }; // list of the integers
-        SelectionSort(numbers); // call the sort function
-
-        Console.WriteLine("Sorted list:");
-        foreach (int num in numbers)
-        {
-            Console.Write(num + " ");
-        }
-    }
+    
+    arr[prev + 1] = current; // Place the current element in its correct position
+  }
+  return arr;
 }
 
+$(document).ready(function() {
+  const unsortedArray = [123,55,21,65,232,7,11,89,3];
+      console.log('Unsorted Array: '+unsortedArray.join(', ')); // Display the unsorted array
+      const sortedArray = insertionSort(unsortedArray.slice()); // call insertionSort funtion
+      console.log('Sorted Array: '+sortedArray.join(', ')); // Display the sorted array
 
-the output : 
-Sorted list:
-11 22 34 37 45 49 67 98 100 119
+    //Output : 
+    //"Unsorted Array: 123, 55, 21, 65, 232, 7, 11, 89, 3"
+    //"Sorted Array: 3, 7, 11, 21, 55, 65, 89, 123, 232"
+});
+
+
