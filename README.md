@@ -78,7 +78,19 @@ Submission: You can submit your solutions in a document or create a GitHub repos
 
 
 Write a function that takes a list of integers and returns the sum of all even numbers.</br>
-https://github.com/yushironakamura/Dream-Team_Okakichi.git
+
+	function sumOfEvenNumbers(numbers) {
+	    let sum = 0;
+	    for (let number of numbers) {
+	        if (number % 2 === 0) { // Check if the number is even
+	            sum += number;
+	        }
+	    }
+	    return sum; // return the value
+	}
+	
+	const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	console.log(sumOfEvenNumbers(numbers)); // Output: 30
 
 Implement a simple sorting algorithm (e.g., bubble sort) for a list of integers.</br>
 https://github.com/yushironakamura/Dream-Team_Okakichi.git
