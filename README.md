@@ -128,7 +128,7 @@ Design a simple RESTful API to manage a to-do list (create, read, update, delete
 	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 	
-	$todoFile = "todolist.json"; // file to store the sample json data.
+	$todoFile = "todolist.json"; // file to store the json data.
 	
 	if (!file_exists($todoFile)) { // to check file exists
 	    file_put_contents($todoFile, json_encode([]));
