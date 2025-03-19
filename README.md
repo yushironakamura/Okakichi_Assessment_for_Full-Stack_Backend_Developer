@@ -120,7 +120,161 @@ Implement a simple sorting algorithm (e.g., bubble sort) for a list of integers.
 	});
 
 Design a simple RESTful API to manage a to-do list (create, read, update, delete tasks)</br>
-https://github.com/yushironakamura/Dream-Team_Okakichi.git
+
+	<?php 
+	
+	header("Content-Type: application/json");
+	header("Access-Control-Allow-Origin: *");
+	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+	
+	$todoFile = "todolist.json"; // file to store the sample json data.
+	
+	if (!file_exists($todoFile)) { // to check file exists
+	    file_put_contents($todoFile, json_encode([]));
+	}
+	
+	function readTodos($file) { // to read and decode file
+	    $todosJson = file_get_contents($file);
+	    return json_decode($todosJson, true);
+	}
+	
+	function saveTodos($todos, $file) { // to encode and save data to file
+	    file_put_contents($file, json_encode($todos, JSON_PRETTY_PRINT));
+	}
+	
+	// retrieve HTTP method and request URL
+	$method = $_SERVER["REQUEST_METHOD"];
+	$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	$uriParts = explode("/", trim($uri, "/"));
+	
+	// /api/todo @ /api/todo/{id}
+	if (count($uriParts) < 2 || $uriParts[0] !== "api" || $uriParts[1] !== "todo") {
+	    http_response_code(404);
+	    echo json_encode(["message" => "Endpoint not found"]);
+	    exit;
+	}
+	
+	$id = null;
+	//get id from URL
+	if (isset($uriParts[2]) && is_numeric($uriParts[2])) {
+	    $id = (int)$uriParts[2];
+	}
+	
+	//load data from file
+	$todos = readTodos($todoFile);
+	
+	// Switch based on HTTP method.
+	switch ($method) {
+	    case "GET":
+	        //if got ID, return based on ID, else return all data
+	        if ($id === null) {
+	            echo json_encode($todos);
+	        } else {
+	            $found = null;
+	            foreach ($todos as $todo) {
+	                if ($todo["id"] === $id) {
+	                    $found = $todo;
+	                    break;
+	                }
+	            }
+	            if ($found === null) {
+	                http_response_code(404);
+	                echo json_encode(["message" => "Todo not found"]);
+	            } else {
+	                echo json_encode($found);
+	            }
+	        }
+	        break;
+	
+	    case "POST":
+	        //add new todo item.
+	        $data = json_decode(file_get_contents("php://input"), true);
+	        if (!isset($data["name"])) {
+	            http_response_code(400);
+	            echo json_encode(["message" => "Invalid data; 'name' is required"]);
+	            exit;
+	        }
+	
+	        //auto-generate ID based on max id
+	        $maxId = 0;
+	        foreach ($todos as $todo) {
+	            if ($todo["id"] > $maxId) {
+	                $maxId = $todo["id"];
+	            }
+	        }
+	        $newTodo = [
+	            "id" => $maxId + 1,
+	            "name" => $data["name"],
+	            "isComplete" => isset($data["isComplete"]) ? (bool)$data["isComplete"] : false,
+	        ];
+	
+	        $todos[] = $newTodo;
+	        saveTodos($todos, $todoFile);
+	        http_response_code(201);
+	        echo json_encode($newTodo);
+	        break;
+	
+	    case "PUT":
+	        //update todo item based on id.
+	        if ($id === null) {
+	            http_response_code(400);
+	            echo json_encode(["message" => "Todo ID is required for update"]);
+	            exit;
+	        }
+	        $data = json_decode(file_get_contents("php://input"), true);
+	        $foundIndex = null;
+	        foreach ($todos as $index => $todo) {
+	            if ($todo["id"] === $id) {
+	                $foundIndex = $index;
+	                break;
+	            }
+	        }
+	        if ($foundIndex === null) {
+	            http_response_code(404);
+	            echo json_encode(["message" => "Todo not found"]);
+	            exit;
+	        }
+	        // Update properties if provided
+	        if (isset($data["name"])) {
+	            $todos[$foundIndex]["name"] = $data["name"];
+	        }
+	        if (isset($data["isComplete"])) {
+	            $todos[$foundIndex]["isComplete"] = (bool)$data["isComplete"];
+	        }
+	        saveTodos($todos, $todoFile);
+	        http_response_code(204); // No content
+	        break;
+	
+	    case "DELETE":
+	        //delete todo item based on id.
+	        if ($id === null) {
+	            http_response_code(400);
+	            echo json_encode(["message" => "Todo ID is required for deletion"]);
+	            exit;
+	        }
+	        $foundIndex = null;
+	        foreach ($todos as $index => $todo) {
+	            if ($todo["id"] === $id) {
+	                $foundIndex = $index;
+	                break;
+	            }
+	        }
+	        if ($foundIndex === null) {
+	            http_response_code(404);
+	            echo json_encode(["message" => "Todo not found"]);
+	            exit;
+	        }
+	        array_splice($todos, $foundIndex, 1);
+	        saveTodos($todos, $todoFile);
+	        http_response_code(204);
+	        break;
+	
+	    default:
+	        http_response_code(405);
+	        echo json_encode(["message" => "Method not allowed"]);
+	        break;
+	}
+	?>
 
 Suppose you need to optimize a slow database query. How would you approach this?</br>
 Example for MSSQL:</br>
