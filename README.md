@@ -93,7 +93,31 @@ Write a function that takes a list of integers and returns the sum of all even n
 	console.log(sumOfEvenNumbers(numbers)); // Output: 30
 
 Implement a simple sorting algorithm (e.g., bubble sort) for a list of integers.</br>
-https://github.com/yushironakamura/Dream-Team_Okakichi.git
+
+	function insertionSort(arr) {
+	  for (let aa = 1; aa < arr.length; aa++) { // Loop from the second element to the end of the array
+	    let current = arr[aa]; // Store the current element
+	    let prev = aa - 1; // Initialize the previous element index
+	    while (prev >= 0 && arr[prev] > current) { // Shift elements of the sorted segment forward if they are larger than the current element
+	      arr[prev + 1] = arr[prev];
+	      prev--;
+	    }
+	    
+	    arr[prev + 1] = current; // Place the current element in its correct position
+	  }
+	  return arr;
+	}
+	
+	$(document).ready(function() {
+	  const unsortedArray = [123,55,21,65,232,7,11,89,3];
+	      console.log('Unsorted Array: '+unsortedArray.join(', ')); // Display the unsorted array
+	      const sortedArray = insertionSort(unsortedArray.slice()); // call insertionSort funtion
+	      console.log('Sorted Array: '+sortedArray.join(', ')); // Display the sorted array
+	
+	    //Output : 
+	    //"Unsorted Array: 123, 55, 21, 65, 232, 7, 11, 89, 3"
+	    //"Sorted Array: 3, 7, 11, 21, 55, 65, 89, 123, 232"
+	});
 
 Design a simple RESTful API to manage a to-do list (create, read, update, delete tasks)</br>
 https://github.com/yushironakamura/Dream-Team_Okakichi.git
