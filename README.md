@@ -285,7 +285,48 @@ Use SQL Server Profiler, to capture and analyze detailed query performance data.
 
 
 Write a function that finds the first duplicate in an array of integers.</br>
-https://github.com/yushironakamura/Dream-Team_Okakichi.git
+
+	using System;
+	using System.Collections.Generic;
+	
+	public class DuplicateFinder
+	{
+	    public static int FindFirstDuplicate(int[] numbers)
+	    {
+	        if (numbers == null || numbers.Length == 0)
+	            throw new ArgumentException("Input array cannot be null or empty.");
+	
+	        HashSet<int> seen = new HashSet<int>();
+	        foreach (int number in numbers)
+	        {
+	            if (seen.Contains(number))
+	            {
+	                // Found the first duplicate
+	                return number;
+	            }
+	            seen.Add(number);
+	        }
+	        return -1; //if no duplicate exists, the function returns -1
+	    }
+	
+	    public static void Main()
+	    {
+	        int[] toCheck = { 3,2,5,1,2,5,7,9,3,1,5 };
+	        int duplicate = FindFirstDuplicate(toCheck); //call function and pass the data
+	        
+	        if (duplicate != -1)
+	        {
+	            Console.WriteLine("The first duplicate is: " + duplicate);
+	        }
+	        else
+	        {
+	            Console.WriteLine("No duplicate found.");
+	        }
+	    }
+	}
+	
+	//output : 
+	//The first duplicate is: 2
 
 
 FizzBuzz Variant
