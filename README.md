@@ -424,7 +424,21 @@ The triangle should be centered, ensuring proper spacing for alignment.</br>
 The solution should work for any programming language.</br>
 Ensure proper error handling for invalid inputs.</br>
 
-https://github.com/yushironakamura/Dream-Team_Okakichi.git
+	function printEquilateralTriangle(n) {
+	    if (!Number.isInteger(n) || n <= 0) {
+	        console.log("Invalid input. Please enter a positive integer.");
+	        return;
+	    }
+	
+	    for (let i = 1; i <= n; i++) {
+	        // Print leading spaces
+	        console.log(" ".repeat(n - i) + "*".repeat(2 * i - 1));
+	    }
+	}
+	
+	// Prompt user for input
+	let n = parseInt(prompt("Enter the height (n) of the equilateral triangle:"));
+	printEquilateralTriangle(n);
 
 
 Game-Specific Questions
