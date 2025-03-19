@@ -1,6 +1,4 @@
-# Dream-Team_Okakichi
-
-Assessment for Full-Stack/Backend Developer
+# Assessment for Full-Stack/Backend Developer
 
 **Introduction**</br>
 This document outlines a comprehensive assessment process for evaluating candidates applying for full-stack or backend developer positions. The assessment includes sections on personality, common sense, logical reasoning, troubleshooting, and coding skills.
