@@ -69,12 +69,13 @@ I believe maintaining a positive mindset and a willingness to learn are crucial.
 
 
 Coding Test
+
 Instructions</br>
-For the coding test, candidates are expected to demonstrate their problem-solving skills and creativity. Please follow these guidelines:
-Honesty: Please solve the test with honesty. We value original work and will evaluate your test based on your creativity and thinking.
-Programming Language: You can use any programming language that you find suitable for the tasks.
-Explanation: Providing explanations or comments in your code will be beneficial. This helps us understand your thought process and design decisions.
-Submission: You can submit your solutions in a document or create a GitHub repository and share the link with us. Please ensure that your repository is accessible and well-organized.
+For the coding test, candidates are expected to demonstrate their problem-solving skills and creativity. Please follow these guidelines:</br>
+Honesty: Please solve the test with honesty. We value original work and will evaluate your test based on your creativity and thinking.</br>
+Programming Language: You can use any programming language that you find suitable for the tasks.</br>
+Explanation: Providing explanations or comments in your code will be beneficial. This helps us understand your thought process and design decisions.</br>
+Submission: You can submit your solutions in a document or create a GitHub repository and share the link with us. Please ensure that your repository is accessible and well-organized.</br>
 
 
 Write a function that takes a list of integers and returns the sum of all even numbers.</br>
