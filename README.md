@@ -275,6 +275,21 @@ Design a simple RESTful API to manage a to-do list (create, read, update, delete
 	        echo json_encode(["message" => "Method not allowed"]);
 	        break;
 	}
+
+ 	//    Get all to-do item
+	//    GET : /api/todo
+	
+	//    Get specific to-do item based on id
+	//    GET : /api/todo/{id}
+	
+	//    Add new to-do item
+	//    POST : /api/todo
+	
+	//    Update existing to-do item based on id
+	//    POST : /api/todo/{id}
+	
+	//    Delete to-do item based on id
+	//    DELETE : /api/todo/{id}
 	?>
 
 Suppose you need to optimize a slow database query. How would you approach this?</br>
